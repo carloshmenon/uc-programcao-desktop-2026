@@ -9,10 +9,15 @@ class MainWindow(QMainWindow):
         ui_file = QFile("ui/tela.ui")
         ui_file.open(QFile.ReadOnly)
         self.ui = loader.load(ui_file)
-        ui_file.close()
-        self.client = ChatClient()
-        self.client.start()
+        ui_file.close()        
         self.ui.btnEnviar.clicked.connect(self.enviar_mensagem)
+        self.ui.btnConectar.clicked.connect(self.conectar_servidor)
+        
+    def conectar_servidor(self):
+        ip = self.ui.textIP.text()
+        porta = self.ui.textPorta.text()              
+        self.client = ChatClient(host=ip, port=int(porta))
+        self.client.start()
         self.client.on_message(self.mostrar_mensagem)
 
     def enviar_mensagem(self):
