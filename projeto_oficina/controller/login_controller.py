@@ -1,7 +1,7 @@
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile
-#from model.usuario_model import UsuarioModel
-from controller.usuario_controller import UsuarioController
+from model.usuario_model import UsuarioModel
+from controller.home_controller import HomeController
 
 class LoginController:
 
@@ -12,20 +12,22 @@ class LoginController:
 
         self.window = loader.load(file)
         file.close()
-        #self.model = UsuarioController()
+        self.model = UsuarioModel()
         self.window.btnLoginEntrar.clicked.connect(self.login)
 
     def login(self):
         email = self.window.inputLoginEmail.text()
         senha = self.window.inputLoginSenha.text()
 
-        usuario = True  #self.model.validar_login(email, senha)
+        usuario = self.model.validar_login(email, senha)
 
         if usuario:
             self.abrir_home()
+        else:
+            print("Erro no Login")
     
     def abrir_home(self):
-        self.home = UsuarioController()
+        self.home = HomeController()
         self.home.show()
         self.window.close()       
 

@@ -1,6 +1,6 @@
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile
-#from model.usuario_model import UsuarioModel
+from model.usuario_model import UsuarioModel
         
 class UsuarioController:
 
@@ -14,7 +14,7 @@ class UsuarioController:
 
         self.window.stackedWidget.setCurrentIndex(0)
 
-        #self.model = UsuarioModel()
+        self.model = UsuarioModel()
 
     def show(self):
         self.window.show()
