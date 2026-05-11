@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1095</width>
+    <width>1088</width>
     <height>529</height>
    </rect>
   </property>
@@ -148,7 +148,7 @@ color: rgb(255, 255, 255);</string>
      <string notr="true">background-color: rgb(193, 193, 193);</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="home">
      <widget class="QLabel" name="label">
