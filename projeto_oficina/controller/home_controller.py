@@ -2,6 +2,7 @@ from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile
 from PySide6.QtWidgets import QTableWidgetItem
 from model.usuario_model import UsuarioModel
+from model.usuario import Usuario
 from PySide6.QtWidgets import QHeaderView
 
 
@@ -21,6 +22,7 @@ class HomeController:
         self.window.btnMenuUsuarios.clicked.connect(self.listar_usuarios)
         self.window.btnUsuariosNovo.clicked.connect(self.novo_usuario)
         self.window.btnCadUsuarioCadastrar.clicked.connect(self.inserir_usuario)
+        self.window.tabelaUsuarios.cellDoubleClicked.connect(self.abrir_edicao)
 
 
     def listar_usuarios(self):
@@ -62,6 +64,21 @@ class HomeController:
             self.listar_usuarios()
         else:
             print("As senhas não são iguais")
+
+    def abrir_edicao(self, row):
+
+        id = int(self.window.tabelaUsuarios.item(row, 0).text())
+        nome = self.window.tabelaUsuarios.item(row, 1).text()
+        email = self.window.tabelaUsuarios.item(row, 2).text()
+        senha = self.window.tabelaUsuarios.item(row, 3).text()
+
+      
+        self.window.stackedWidget.setCurrentIndex(2)
+        
+        self.window.inputCadUsuarioNome.setText(nome)
+        self.window.inputCadUsuarioEmail.setText(email)
+        self.window.inputCadUsuarioSenha.setText(senha)
+    
 
     def show(self):
         self.window.show()

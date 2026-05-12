@@ -2,6 +2,7 @@ from database.conexao import conectar
 
 class UsuarioModel:
 
+
     def validar_login(self, email, senha):
         conn = conectar()       
         cursor = conn.cursor()
