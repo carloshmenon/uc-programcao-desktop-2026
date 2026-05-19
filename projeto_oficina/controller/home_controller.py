@@ -2,6 +2,7 @@ from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile
 from PySide6.QtWidgets import QTableWidgetItem
 from model.usuario_model import UsuarioModel
+from PySide6.QtWidgets import QHeaderView
 
 
         
@@ -28,6 +29,18 @@ class HomeController:
         dados = self.model.listar(self)
 
         self.window.tabelaUsuarios.setRowCount(len(dados))
+        #retira a coluna vertical de numeros
+        self.window.tabelaUsuarios.verticalHeader().setVisible(False)
+
+        #Permite a seleção da linha
+        self.window.tabelaUsuarios.setSelectionBehavior(
+            self.window.tabelaUsuarios.SelectionBehavior.SelectRows
+        )
+
+        #faz o auto ajuste das colunas
+        self.window.tabelaUsuarios.horizontalHeader().setSectionResizeMode(
+            QHeaderView.Stretch
+        )
 
         for linha, usuario in enumerate(dados):
             self.window.tabelaUsuarios.setItem(linha, 0, QTableWidgetItem(str(usuario[0])))

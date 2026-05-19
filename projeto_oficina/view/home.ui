@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1088</width>
-    <height>529</height>
+    <width>1212</width>
+    <height>706</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>10</x>
       <y>10</y>
       <width>120</width>
-      <height>571</height>
+      <height>681</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -140,15 +140,15 @@ color: rgb(255, 255, 255);</string>
      <rect>
       <x>140</x>
       <y>10</y>
-      <width>901</width>
-      <height>571</height>
+      <width>1061</width>
+      <height>711</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(193, 193, 193);</string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="home">
      <widget class="QLabel" name="label">
@@ -210,10 +210,10 @@ color: rgb(255, 255, 255);</string>
      <widget class="QTableWidget" name="tabelaUsuarios">
       <property name="geometry">
        <rect>
-        <x>160</x>
-        <y>110</y>
-        <width>521</width>
-        <height>291</height>
+        <x>170</x>
+        <y>130</y>
+        <width>681</width>
+        <height>471</height>
        </rect>
       </property>
       <property name="columnCount">
@@ -222,10 +222,26 @@ color: rgb(255, 255, 255);</string>
       <attribute name="verticalHeaderHighlightSections">
        <bool>false</bool>
       </attribute>
-      <column/>
-      <column/>
-      <column/>
-      <column/>
+      <column>
+       <property name="text">
+        <string>ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>NOME</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>EMAIL</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>SENHA</string>
+       </property>
+      </column>
      </widget>
     </widget>
     <widget class="QWidget" name="cadUsuario">
@@ -251,10 +267,10 @@ color: rgb(255, 255, 255);</string>
      <widget class="QFrame" name="frame_2">
       <property name="geometry">
        <rect>
-        <x>180</x>
-        <y>130</y>
-        <width>491</width>
-        <height>331</height>
+        <x>200</x>
+        <y>120</y>
+        <width>611</width>
+        <height>411</height>
        </rect>
       </property>
       <property name="styleSheet">
