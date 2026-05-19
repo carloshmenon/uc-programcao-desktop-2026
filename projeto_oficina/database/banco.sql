@@ -1,4 +1,4 @@
-CREATE DATABASE sistema;
+CREATE DATABASE sistema_bicicletaria;
 
 USE sistema;
 
