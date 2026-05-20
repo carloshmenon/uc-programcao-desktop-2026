@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+
+ <class>MainWindow</class>
+
+ <widget class="QMainWindow" name="MainWindow">
+
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>600</height>
+   </rect>
+  </property>
+
+  <property name="windowTitle">
+   <string>Relatórios</string>
+  </property>
+
+  <property name="styleSheet">
+   <string notr="true">
+background-color: rgb(229,229,229);
+   </string>
+  </property>
+
+  <widget class="QWidget" name="centralwidget">
+
+   <widget class="QStackedWidget" name="stackedWidget">
+
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>900</width>
+      <height>600</height>
+     </rect>
+    </property>
+
+    <!-- MENU -->
+
+    <widget class="QWidget" name="pageMenu">
+
+     <widget class="QFrame" name="frameMenu">
+
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>100</y>
+        <width>450</width>
+        <height>350</height>
+       </rect>
+      </property>
+
+      <property name="styleSheet">
+       <string notr="true">
+background-color: rgb(52,82,255);
+border-radius: 10px;
+       </string>
+      </property>
+
+      <widget class="QLabel" name="labelTitulo">
+
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>30</y>
+         <width>220</width>
+         <height>40</height>
+        </rect>
+       </property>
+
+       <property name="font">
+        <font>
+         <pointsize>18</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+
+       <property name="styleSheet">
+        <string notr="true">
+color: white;
+        </string>
+       </property>
+
+       <property name="text">
+        <string>RELATÓRIOS</string>
+       </property>
+
+      </widget>
+
+      <!-- BOTÕES -->
+
+      <widget class="QPushButton" name="btnRelatorioClientes">
+
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>100</y>
+         <width>200</width>
+         <height>40</height>
+        </rect>
+       </property>
+
+       <property name="text">
+        <string>RELATÓRIO CLIENTES</string>
+       </property>
+
+      </widget>
+
+      <widget class="QPushButton" name="btnRelatorioBicicletas">
+
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>160</y>
+         <width>200</width>
+         <height>40</height>
+        </rect>
+       </property>
+
+       <property name="text">
+        <string>RELATÓRIO BICICLETAS</string>
+       </property>
+
+      </widget>
+
+      <widget class="QPushButton" name="btnRelatorioServicos">
+
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>220</y>
+         <width>200</width>
+         <height>40</height>
+        </rect>
+       </property>
+
+       <property name="text">
+        <string>RELATÓRIO SERVIÇOS</string>
+       </property>
+
+      </widget>
+
+      <widget class="QPushButton" name="btnGerarPdf">
+
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>290</y>
+         <width>200</width>
+         <height>40</height>
+        </rect>
+       </property>
+
+       <property name="text">
+        <string>GERAR PDF</string>
+       </property>
+
+      </widget>
+
+     </widget>
+
+    </widget>
+
+    <!-- VISUALIZAÇÃO -->
+
+    <widget class="QWidget" name="pageRelatorio">
+
+     <widget class="QTableWidget" name="tabelaRelatorios">
+
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>40</y>
+        <width>820</width>
+        <height>500</height>
+       </rect>
+      </property>
+
+      <column>
+       <property name="text">
+        <string>ID</string>
+       </property>
+      </column>
+
+      <column>
+       <property name="text">
+        <string>Nome</string>
+       </property>
+      </column>
+
+      <column>
+       <property name="text">
+        <string>Informação</string>
+       </property>
+      </column>
+
+      <column>
+       <property name="text">
+        <string>Status</string>
+       </property>
+      </column>
+
+     </widget>
+
+    </widget>
+
+   </widget>
+
+  </widget>
+
+  <widget class="QStatusBar" name="statusbar"/>
+
+ </widget>
+
+ <resources/>
+ <connections/>
+
+</ui>
