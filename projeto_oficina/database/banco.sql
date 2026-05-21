@@ -1,6 +1,6 @@
 CREATE DATABASE sistema_bicicletaria;
 
-USE sistema;
+USE sistema_bicicletaria;
 
 CREATE TABLE usuarios(
     id  INT AUTO_INCREMENT PRIMARY KEY,

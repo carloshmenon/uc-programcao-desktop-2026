@@ -47,22 +47,22 @@ class HomeController:
         )
 
         # CLIENTES
-        self.window.btnClientes.clicked.connect(
+        self.window.btnMenuClientes.clicked.connect(
             self.abrir_clientes
         )
 
         # BICICLETAS
-        self.window.btnBicicletas.clicked.connect(
+        self.window.btnMenuBicicletas.clicked.connect(
             self.abrir_bicicletas
         )
 
         # SERVIÇOS
-        self.window.btnServicos.clicked.connect(
+        self.window.btnMenuServicos.clicked.connect(
             self.abrir_servicos
         )
 
         # RELATÓRIOS
-        self.window.btnRelatorios.clicked.connect(
+        self.window.btnMenuRelatorios.clicked.connect(
             self.abrir_relatorios
         )
 
@@ -172,9 +172,45 @@ class HomeController:
     # =========================
 
     def abrir_clientes(self):
-
-        self.tela_clientes = ClientesController()
-        self.tela_clientes.show()
+        # 1. Cria a tela passando a janela principal como referência
+        self.tela_clientes = ClientesController(main_window=self.window)
+        
+        # 2. LOCALIZA A TABELA DE FORMA SEGURA (Mapeando possíveis nomes)
+        tabela = None
+        
+        if hasattr(self.window, 'tabelaClientes'):
+            tabela = self.window.tabelaClientes
+        elif hasattr(self.window, 'tableWidget'):
+            tabela = self.window.tableWidget
+            print("AVISO: Usando o nome padrão 'tableWidget' para a tabela de clientes.")
+        elif hasattr(self.window, 'tabela_clientes'):
+            tabela = self.window.tabela_clientes
+        
+        # 3. CONECTA SÓ SE DOIS REQUISITOS FOREM ATENDIDOS
+        if tabela is not None:
+            # Vincula o duplo clique da tabela encontrada à função de edição
+            tabela.cellDoubleClicked.connect(self.tela_clientes.abrir_edicao)
+            
+            # ATENÇÃO: Ajustamos o ClientesController para usar a tabela correta dinamicamente
+            # Substituindo temporariamente a referência interna dele
+            self.window.tabelaClientes = tabela 
+        else:
+            print("\n[ERRO CRÍTICO] A tabela de clientes não foi encontrada com os nomes testados!")
+            print("Componentes disponíveis na sua interface Home:")
+            # Mostra no terminal todos os componentes que existem na tela para você achar o nome da tabela
+            for comp in dir(self.window):
+                if not comp.startswith('_'):
+                    print(f" - {comp}")
+        
+        # 4. Configura o botão de "Novo Cliente" de forma segura
+        if hasattr(self.window, 'btnNovoCliente'):
+            self.window.btnNovoCliente.clicked.connect(lambda: self.window.stackedWidget.setCurrentIndex(2))
+        
+        # 5. Tenta listar os clientes
+        try:
+            self.tela_clientes.listar_clientes()
+        except Exception as e:
+            print(f"Aviso ao listar: {e} (Pode ser que a aba da tabela ainda precise de ajuste de index)")
 
     def abrir_bicicletas(self):
 

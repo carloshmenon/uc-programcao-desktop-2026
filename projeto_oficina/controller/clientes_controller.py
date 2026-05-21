@@ -1,134 +1,97 @@
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile
-from PySide6.QtWidgets import QTableWidgetItem
-from PySide6.QtWidgets import QHeaderView
-
-from model.usuario_model import UsuarioModel
-
+from PySide6.QtWidgets import QTableWidgetItem, QHeaderView
+from model.cliente_model import ClienteModel
 
 class ClientesController:
 
-    def __init__(self):
-
+    def __init__(self, main_window=None):
         loader = QUiLoader()
 
         file = QFile("view/clientes.ui")
         file.open(QFile.ReadOnly)
-
         self.window = loader.load(file)
         file.close()
 
-        # reutilizando UsuarioModel
-        self.model = UsuarioModel
+        # Guarda a referência da Home para poder alternar as páginas no stackedWidget global
+        self.main_window = main_window
+        
+        # Reutilizando UsuarioModel
+        self.model = ClienteModel
 
-        self.window.stackedWidget.setCurrentIndex(0)
+        # --- BOTÕES ---
+        # Como o botão Salvar está neste arquivo .ui, conectamos ele aqui:
+        self.window.btnSalvarCliente.clicked.connect(self.inserir_cliente)
 
-        # BOTÕES
-        self.window.btnMenuClientes.clicked.connect(
-            self.listar_clientes
-        )
+        # NOTA: Os botões de listar, trocar para aba de novo cliente e a tabela 
+        # devem ser configurados no HomeController, pois pertencem à tela principal.
 
-        self.window.btnNovoCliente.clicked.connect(
-            self.novo_cliente
-        )
-
-        self.window.btnSalvarCliente.clicked.connect(
-            self.inserir_cliente
-        )
-
-        # TABELA
-        self.window.tabelaClientes.cellDoubleClicked.connect(
-            self.abrir_edicao
-        )
-
-    # LISTAR
+    # LISTAR (Atualiza a tabela que fica na main_window)
     def listar_clientes(self):
+        if not self.main_window:
+            return
 
-        self.window.stackedWidget.setCurrentIndex(1)
+        # Muda o index do stackedWidget da tela principal para a listagem
+        self.main_window.stackedWidget.setCurrentIndex(1)
 
         dados = self.model.listar(self)
+        
+        # A tabela fica na janela principal (Home)
+        tabela = self.main_window.tabelaClientes
+        tabela.setRowCount(len(dados))
 
-        self.window.tabelaClientes.setRowCount(len(dados))
+        # Remove números laterais
+        tabela.verticalHeader().setVisible(False)
 
-        # remove números laterais
-        self.window.tabelaClientes.verticalHeader().setVisible(False)
+        # Selecionar linha inteira
+        tabela.setSelectionBehavior(tabela.SelectionBehavior.SelectRows)
 
-        # selecionar linha inteira
-        self.window.tabelaClientes.setSelectionBehavior(
-            self.window.tabelaClientes.SelectionBehavior.SelectRows
-        )
-
-        # ajustar colunas
-        self.window.tabelaClientes.horizontalHeader().setSectionResizeMode(
-            QHeaderView.Stretch
-        )
+        # Ajustar colunas
+        tabela.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
         for linha, cliente in enumerate(dados):
-
-            self.window.tabelaClientes.setItem(
-                linha,
-                0,
-                QTableWidgetItem(str(cliente[0]))
-            )
-
-            self.window.tabelaClientes.setItem(
-                linha,
-                1,
-                QTableWidgetItem(cliente[1])
-            )
-
-            self.window.tabelaClientes.setItem(
-                linha,
-                2,
-                QTableWidgetItem(cliente[2])
-            )
-
-            self.window.tabelaClientes.setItem(
-                linha,
-                3,
-                QTableWidgetItem(cliente[3])
-            )
-
-    # NOVO
-    def novo_cliente(self):
-
-        self.window.stackedWidget.setCurrentIndex(2)
+            tabela.setItem(linha, 0, QTableWidgetItem(str(cliente[0])))
+            tabela.setItem(linha, 1, QTableWidgetItem(cliente[1]))
+            tabela.setItem(linha, 2, QTableWidgetItem(cliente[2]))
+            tabela.setItem(linha, 3, QTableWidgetItem(cliente[3]))
 
     # INSERIR
     def inserir_cliente(self):
+        # Nomes corrigidos de acordo com o seu arquivo XML!
+        nome = self.window.inputNomeCliente.text()
+        email = self.window.inputEmailCliente.text()
+        telefone = self.window.inputTelefoneCliente.text()
 
-        nome = self.window.inputNome.text()
-        email = self.window.inputEmail.text()
-        senha = self.window.inputTelefone.text()
+        # Reutilizando o método inserir do seu model
+        self.model.inserir(self, nome, email, telefone)
+        
+        # Limpa os campos após salvar
+        self.window.inputNomeCliente.clear()
+        self.window.inputEmailCliente.clear()
+        self.window.inputTelefoneCliente.clear()
 
-        # reutilizando método inserir
-        self.model.inserir(
-            self,
-            nome,
-            email,
-            senha
-        )
-
+        # Recarrega a tabela
         self.listar_clientes()
 
-    # EDITAR
+    # EDITAR / PREENCHER FORMULÁRIO
     def abrir_edicao(self, row):
+        if not self.main_window:
+            return
 
-        id_cliente = int(
-            self.window.tabelaClientes.item(row, 0).text()
-        )
+        tabela = self.main_window.tabelaClientes
+        
+        id_cliente = int(tabela.item(row, 0).text())
+        nome = tabela.item(row, 1).text()
+        email = tabela.item(row, 2).text()
+        telefone = tabela.item(row, 3).text()
 
-        nome = self.window.tabelaClientes.item(row, 1).text()
+        # Muda para o index do formulário de cadastro no seu stackedWidget global
+        self.main_window.stackedWidget.setCurrentIndex(2)
 
-        email = self.window.tabelaClientes.item(row, 2).text()
-
-        telefone = self.window.tabelaClientes.item(row, 3).text()
-
-        self.window.stackedWidget.setCurrentIndex(2)
-
-        self.window.inputNome.setText(nome)
-        self.window.inputEmail.setText(email)
-        self.window.inputTelefone.setText(telefone)
+        # Preenche os inputs do formulário com os dados da linha clicada
+        self.window.inputNomeCliente.setText(nome)
+        self.window.inputEmailCliente.setText(email)
+        self.window.inputTelefoneCliente.setText(telefone)
 
     def show(self):
         self.window.show()
