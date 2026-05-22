@@ -44,7 +44,7 @@ class RelatoriosController:
 
         self.window.stackedWidget.setCurrentIndex(1)
 
-        dados = self.model.listar(self)
+        dados = self.model.listar()
 
         self.preencher_tabela(dados)
 
@@ -53,7 +53,7 @@ class RelatoriosController:
 
         self.window.stackedWidget.setCurrentIndex(1)
 
-        dados = self.model.listar(self)
+        dados = self.model.listar()
 
         self.preencher_tabela(dados)
 
@@ -62,7 +62,7 @@ class RelatoriosController:
 
         self.window.stackedWidget.setCurrentIndex(1)
 
-        dados = self.model.listar(self)
+        dados = self.model.listar()
 
         self.preencher_tabela(dados)
 

@@ -47,7 +47,7 @@ class BicicletasController:
 
         self.window.stackedWidget.setCurrentIndex(1)
 
-        dados = self.model.listar(self)
+        dados = self.model.listar()
 
         self.window.tabelaBicicletas.setRowCount(len(dados))
 
@@ -104,7 +104,7 @@ class BicicletasController:
 
         # reutilizando UsuarioModel
         self.model.inserir(
-            self,
+            
             marca,
             modelo,
             cor

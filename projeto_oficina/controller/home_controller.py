@@ -74,7 +74,7 @@ class HomeController:
 
         self.window.stackedWidget.setCurrentIndex(1)
 
-        dados = self.model.listar(self)
+        dados = self.model.listar()
 
         self.window.tabelaUsuarios.setRowCount(len(dados))
 
@@ -136,7 +136,7 @@ class HomeController:
         if senha == confirmar_senha:
 
             self.model.inserir(
-                self,
+                
                 nome,
                 email,
                 senha
