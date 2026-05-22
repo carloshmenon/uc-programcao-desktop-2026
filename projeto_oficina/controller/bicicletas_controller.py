@@ -19,7 +19,7 @@ class BicicletasController:
         file.close()
 
         # reutilizando UsuarioModel
-        self.model = UsuarioModel
+        self.model = UsuarioModel ()
 
         # página inicial
         self.window.stackedWidget.setCurrentIndex(0)

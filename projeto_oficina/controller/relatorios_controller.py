@@ -18,7 +18,7 @@ class RelatoriosController:
         self.window = loader.load(file)
         file.close()
 
-        self.model = UsuarioModel
+        self.model = UsuarioModel()
 
         self.window.stackedWidget.setCurrentIndex(0)
 

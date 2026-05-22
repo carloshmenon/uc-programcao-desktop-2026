@@ -24,7 +24,7 @@ class HomeController:
         self.window = loader.load(file)
         file.close()
 
-        self.model = UsuarioModel
+        self.model = UsuarioModel()
 
         # Página inicial
         self.window.stackedWidget.setCurrentIndex(0)

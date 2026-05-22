@@ -1,23 +1,23 @@
 import sqlite3
 
-class ClienteModel:
+class ServicoModel:
     def __init__(self):
        self.db_name = "database/oficina.db"
-       
+
     def listar(self):
         conexao = sqlite3.connect(self.db_name)
         cursor = conexao.cursor()
-        cursor.execute("SELECT id, nome, email, telefone FROM clientes")
+        cursor.execute("SELECT id, servico, valor, descricao FROM servicos")
         dados = cursor.fetchall()
         conexao.close()
         return dados
 
-    def inserir(self, nome, email, telefone):
+    def inserir(self, servico, valor, descricao):
         conexao = sqlite3.connect(self.db_name)
         cursor = conexao.cursor()
         cursor.execute(
-            "INSERT INTO clientes (nome, email, telefone) VALUES (?, ?, ?)",
-            (nome, email, telefone)
+            "INSERT INTO servicos (servico, valor, descricao) VALUES (?, ?, ?)",
+            (servico, valor, descricao)
         )
         conexao.commit()
         conexao.close()

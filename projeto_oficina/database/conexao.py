@@ -5,5 +5,5 @@ def conectar():
         host="localhost",
         user="root",
         password="",
-        database="sistema"
+        database="sistema_bicicletaria"
     )
