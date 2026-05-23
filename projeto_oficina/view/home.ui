@@ -148,7 +148,7 @@ color: rgb(255, 255, 255);</string>
      <string notr="true">background-color: rgb(193, 193, 193);</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="home">
      <widget class="QLabel" name="label">
@@ -167,6 +167,16 @@ color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
        <string>Home</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>140</y>
+        <width>256</width>
+        <height>192</height>
+       </rect>
       </property>
      </widget>
     </widget>
