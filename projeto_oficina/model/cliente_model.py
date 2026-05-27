@@ -2,7 +2,7 @@ import sqlite3
 
 class ClienteModel:
     def __init__(self):
-       self.db_name = "database/oficina.db"
+       self.db_name = "oficina.db"
        
     def listar(self):
         conexao = sqlite3.connect(self.db_name)

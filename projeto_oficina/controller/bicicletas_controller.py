@@ -3,7 +3,7 @@ from PySide6.QtCore import QFile
 from PySide6.QtWidgets import QTableWidgetItem
 from PySide6.QtWidgets import QHeaderView
 
-from model.usuario_model import UsuarioModel
+from model.usuario_model import BicicletasModel
 
 
 class BicicletasController:
@@ -19,7 +19,7 @@ class BicicletasController:
         file.close()
 
         # reutilizando UsuarioModel
-        self.model = UsuarioModel ()
+        self.model = BicicletasModel ()
 
         # página inicial
         self.window.stackedWidget.setCurrentIndex(0)
